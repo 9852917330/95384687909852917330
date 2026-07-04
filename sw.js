@@ -1,4 +1,4 @@
-const CACHE_NAME = "in-and-out-pwa-2026-06-27-v1";
+const CACHE_NAME = "in-and-out-pwa-2026-07-04-v4";
 const APP_SHELL = [
   "./",
   "./index.html",

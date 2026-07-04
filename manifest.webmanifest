@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "In and Out — Energy Dashboard",
+  "name": "In and Out — Energy Dashboard V4",
   "short_name": "In and Out",
-  "description": "Theo dõi calories, tập luyện, cân nặng, vòng eo và tiến độ mỡ cơ thể.",
+  "description": "Theo dõi calories, tập luyện, cân nặng, vòng eo và tiến độ mỡ cơ thể với CSDL món Việt/Tây mở rộng.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
@@ -12,8 +12,8 @@
     "minimal-ui"
   ],
   "orientation": "any",
-  "background_color": "#f4f8fb",
-  "theme_color": "#14a978",
+  "background_color": "#ffffff",
+  "theme_color": "#e3262e",
   "icons": [
     {
       "src": "./icon-192.png",
