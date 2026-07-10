@@ -31,3 +31,9 @@ Sau khi GitHub Pages build xong, mở app trên điện thoại, đóng hẳn ap
 ## Lưu ý dữ liệu dinh dưỡng
 
 Các món không có trọng lượng cụ thể vẫn là ước tính theo khẩu phần chuẩn. Muốn chính xác hơn, nhập kiểu: `ức gà 200g`, `cơm 150g`, `latte 300ml`, hoặc nhập trực tiếp `450 kcal`.
+
+
+## Cập nhật 10/07/2026
+- Bổ sung Protein, Carb và Fat cho từng món theo đúng khẩu phần đã nhận diện.
+- Ba chất được tự động sắp xếp từ số gram cao nhất đến thấp nhất.
+- Bổ sung tổng macro theo ngày và nâng cache Service Worker lên v5.
