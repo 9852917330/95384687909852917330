@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "In and Out — Energy Dashboard V4",
+  "name": "In and Out — Energy Dashboard V6",
   "short_name": "In and Out",
-  "description": "Theo dõi calories, tập luyện, cân nặng, vòng eo và tiến độ mỡ cơ thể với CSDL món Việt/Tây mở rộng.",
+  "description": "Theo dõi calories và macro với CSDL ưu tiên song ngữ, nhận diện cách chế biến và kiểm tra chéo năng lượng.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
