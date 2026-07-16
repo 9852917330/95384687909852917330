@@ -346,6 +346,180 @@ html[data-theme="dark"] .tag{color:#9cf3d7!important;background:rgba(74,218,174,
 html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gradient(145deg,#2c4764,#1c3048)!important;border-color:#6685a3!important}
 
 </style>
+
+
+<style id="target-burn-highlight-v1">
+  .target-burn-hero{
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+    gap:14px;
+    align-items:stretch;
+    margin:0 0 14px;
+    padding:18px;
+    border:2px solid rgba(255,198,109,.72);
+    border-radius:22px;
+    background:
+      radial-gradient(circle at 92% 0%,rgba(255,198,109,.22),transparent 22rem),
+      radial-gradient(circle at 0% 0%,rgba(255,113,133,.16),transparent 20rem),
+      linear-gradient(135deg,rgba(255,198,109,.18),rgba(8,28,23,.95) 56%,rgba(4,16,13,.98));
+    box-shadow:0 22px 60px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.05) inset;
+    overflow:hidden;
+  }
+  .target-burn-hero:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#ffc66d,#ff7185,#66f2c2);
+  }
+  .target-burn-main,.target-burn-walk{
+    position:relative;
+    min-width:0;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:17px;
+    background:rgba(0,0,0,.18);
+  }
+  .target-burn-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:8px;
+    padding:6px 9px;
+    border:1px solid rgba(255,198,109,.38);
+    border-radius:999px;
+    color:#ffd99b;
+    background:rgba(255,198,109,.10);
+    font-size:9px;
+    font-weight:1000;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .target-burn-title{
+    margin:0 0 8px;
+    font-size:clamp(17px,2vw,25px);
+    line-height:1.12;
+    letter-spacing:-.7px;
+    color:#fff8e8;
+  }
+  .target-burn-kcal{
+    margin:0;
+    font-size:clamp(34px,6vw,62px);
+    line-height:.98;
+    letter-spacing:-2.2px;
+    font-weight:1100;
+    color:#ffc66d;
+    text-shadow:0 0 30px rgba(255,198,109,.24);
+  }
+  .target-burn-sub{
+    margin-top:10px;
+    color:#ffe5b8;
+    font-size:12px;
+    line-height:1.55;
+    font-weight:800;
+  }
+  .target-burn-walk-label{
+    color:#9cffdc;
+    font-size:10px;
+    font-weight:1000;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .target-burn-time{
+    margin-top:8px;
+    font-size:clamp(27px,4.6vw,49px);
+    line-height:1;
+    font-weight:1100;
+    letter-spacing:-1.8px;
+    color:#66f2c2;
+    text-shadow:0 0 26px rgba(102,242,194,.20);
+  }
+  .target-burn-walk-sub{
+    margin-top:10px;
+    color:#bae9db;
+    font-size:11px;
+    line-height:1.5;
+    font-weight:750;
+  }
+  .target-burn-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin-top:12px;
+  }
+  .target-burn-mini{
+    min-width:0;
+    padding:9px 10px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:12px;
+    background:rgba(255,255,255,.04);
+  }
+  .target-burn-mini span{
+    display:block;
+    color:#9bbbae;
+    font-size:8px;
+    font-weight:950;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .target-burn-mini b{
+    display:block;
+    margin-top:5px;
+    color:#f4fff9;
+    font-size:13px;
+    line-height:1.18;
+  }
+  .target-burn-formula{
+    grid-column:1/-1;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed rgba(255,255,255,.14);
+    color:#9ebfb3;
+    font-size:9.5px;
+    line-height:1.45;
+  }
+  html[data-theme="light"] .target-burn-hero{
+    background:
+      radial-gradient(circle at 92% 0%,rgba(255,198,109,.38),transparent 22rem),
+      radial-gradient(circle at 0% 0%,rgba(255,113,133,.20),transparent 20rem),
+      linear-gradient(135deg,#fff7e5,#eafff8 64%,#ffffff);
+    border-color:rgba(228,138,33,.58);
+    box-shadow:0 20px 55px rgba(168,112,40,.17),0 0 0 1px rgba(255,255,255,.8) inset;
+  }
+  html[data-theme="light"] .target-burn-main,
+  html[data-theme="light"] .target-burn-walk{
+    background:rgba(255,255,255,.68);
+    border-color:rgba(120,80,18,.12);
+  }
+  html[data-theme="light"] .target-burn-title{color:#173328}
+  html[data-theme="light"] .target-burn-kcal{color:#d47a00}
+  html[data-theme="light"] .target-burn-sub{color:#7b4d0d}
+  html[data-theme="light"] .target-burn-time{color:#13996f}
+  html[data-theme="light"] .target-burn-walk-label{color:#0d8d67}
+  html[data-theme="light"] .target-burn-walk-sub,
+  html[data-theme="light"] .target-burn-formula{color:#4e6d61}
+  html[data-theme="light"] .target-burn-mini{
+    background:rgba(255,255,255,.75);
+    border-color:rgba(0,0,0,.07);
+  }
+  html[data-theme="light"] .target-burn-mini span{color:#658075}
+  html[data-theme="light"] .target-burn-mini b{color:#173328}
+  @media(max-width:900px){
+    .target-burn-hero{grid-template-columns:1fr;padding:14px;border-radius:19px}
+    .target-burn-grid{grid-template-columns:1fr 1fr}
+    .target-burn-formula{grid-column:1/-1}
+  }
+  @media(max-width:620px){
+    .target-burn-hero{padding:12px;margin-bottom:12px}
+    .target-burn-main,.target-burn-walk{padding:12px}
+    .target-burn-kcal{font-size:36px}
+    .target-burn-time{font-size:31px}
+    .target-burn-grid{grid-template-columns:1fr}
+  }
+</style>
 </head>
 
 <body>
@@ -366,7 +540,30 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
 <main>
 <section id="page-overview" class="page active">
   <section class="dashboard-strip"><div class="strip-copy"><div class="eyebrow">IN / OUT ENERGY CONTROL</div><h1>Cân bằng năng lượng hôm nay</h1><p>Google Sheet được đồng bộ tự động. Web nhận diện món Việt, món Tây và alias tiếng Anh/không dấu; tính calo ăn vào, calo tập và mức thâm hụt thực tế.</p><div class="actions"><button id="refreshBtn" class="btn primary">↻ Cập nhật ngay</button><button id="openSheetBtn" class="btn">↗ Mở Google Sheet</button></div><div id="dataBanner" class="banner"></div></div><div class="strip-stats"><div class="strip-stat"><span>Dữ liệu mới nhất</span><strong id="latestDate">—</strong></div><div class="strip-stat"><span>Cập nhật dashboard</span><strong id="lastSync">—</strong></div><div class="strip-stat wide"><span>Trạng thái hôm gần nhất</span><strong id="latestStatus">—</strong></div></div></section>
-  <section class="section"><div class="section-head"><div><h2>Tổng quan</h2><p>Các chỉ số mới nhất từ cân nặng, vòng eo, calo và vận động.</p></div><span class="tag">LIVE METRICS</span></div><div class="grid kpi-grid">
+  <section class="section"><div class="section-head"><div><h2>Tổng quan</h2><p>Các chỉ số mới nhất từ cân nặng, vòng eo, calo và vận động.</p></div><span class="tag">LIVE METRICS</span></div><div class="target-burn-hero" aria-live="polite">
+      <article class="target-burn-main">
+        <div class="target-burn-eyebrow">🔥 Ưu tiên số 1 · Mục tiêu 15% mỡ</div>
+        <h3 class="target-burn-title">Tổng calo còn phải đốt tính từ trạng thái hiện tại</h3>
+        <div id="targetBurnKcal" class="target-burn-kcal">—</div>
+        <div id="targetBurnSub" class="target-burn-sub">—</div>
+        <div class="target-burn-grid">
+          <div class="target-burn-mini"><span>Cân mục tiêu hiện tại</span><b id="targetBurnWeight">—</b></div>
+          <div class="target-burn-mini"><span>Mỡ cần giảm</span><b id="targetBurnFatKg">—</b></div>
+          <div class="target-burn-mini"><span>Độ chính xác</span><b>Khối nạc hiện tại</b></div>
+        </div>
+      </article>
+      <article class="target-burn-walk">
+        <div class="target-burn-walk-label">Tương đương đi bộ dốc 15 · 3,3 km/h</div>
+        <div id="targetBurnWalkTime" class="target-burn-time">—</div>
+        <div id="targetBurnWalkSub" class="target-burn-walk-sub">—</div>
+        <div class="target-burn-grid">
+          <div class="target-burn-mini"><span>Tốc độ đốt ước tính</span><b id="targetBurnRate">—</b></div>
+          <div class="target-burn-mini"><span>Buổi 60 phút</span><b id="targetBurnSessions60">—</b></div>
+          <div class="target-burn-mini"><span>Buổi 90 phút</span><b id="targetBurnSessions90">—</b></div>
+          <div class="target-burn-formula" id="targetBurnFormula">—</div>
+        </div>
+      </article>
+    </div><div class="grid kpi-grid">
     <article class="kpi green"><div class="kpi-label">Cân nặng hiện tại</div><div id="kpiWeight" class="kpi-value">—</div><div id="kpiWeightSub" class="kpi-sub">—</div></article>
     <article class="kpi cyan"><div class="kpi-label">Vòng eo</div><div id="kpiWaist" class="kpi-value">—</div><div id="kpiWaistSub" class="kpi-sub">—</div></article>
     <article class="kpi purple"><div class="kpi-label">Mỡ ước tính</div><div id="kpiBodyFat" class="kpi-value">—</div><div id="kpiBodyFatSub" class="kpi-sub">—</div></article>
@@ -7632,6 +7829,7 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
             : "Chưa tạo thâm hụt"
         : "Chưa đủ dữ liệu",
     );
+    updateTargetBurnHighlight(currentWeight, currentBf);
     updateSlope(progress, cumulative, totalGoal, targetWeight);
     const todayData =
       computedDays.find((d) => dateKey(d.date) === dateKey(today)) || null;
@@ -7719,6 +7917,78 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
           : "Không thay đổi: 0,00 kg",
     );
   }
+
+  function formatTargetBurnDuration(minutes) {
+    if (!Number.isFinite(minutes) || minutes <= 0) return "0 giờ";
+    const totalMinutes = Math.round(minutes);
+    const hours = Math.floor(totalMinutes / 60);
+    const mins = totalMinutes % 60;
+    if (hours >= 24) {
+      const days = Math.floor(hours / 24);
+      const remHours = hours % 24;
+      return `${fmt(hours)} giờ ${mins ? `${mins} phút` : ""} · ${fmt(days)} ngày ${remHours ? `${remHours} giờ` : ""}`.trim();
+    }
+    if (hours > 0) return `${fmt(hours)} giờ ${mins ? `${mins} phút` : ""}`.trim();
+    return `${fmt(mins)} phút`;
+  }
+  function calculateTargetBurnPlan(currentWeight, currentBodyFat) {
+    const targetRatio = PROFILE.targetBodyFat / 100;
+    const currentFatRatio = currentBodyFat / 100;
+    const leanMass = currentWeight * (1 - currentFatRatio);
+    const targetWeightNow = leanMass / (1 - targetRatio);
+    const fatKgToLose = Math.max(0, currentWeight - targetWeightNow);
+    const kcalToBurn = fatKgToLose * 7700;
+
+    const treadmillSpeedKmh = 3.3;
+    const treadmillGrade = 0.15;
+    const speedMetersPerMinute = treadmillSpeedKmh * 1000 / 60;
+    const vo2 = 0.1 * speedMetersPerMinute + 1.8 * speedMetersPerMinute * treadmillGrade + 3.5;
+    const kcalPerMinute = vo2 * currentWeight * 5 / 1000;
+    const walkMinutes = kcalPerMinute > 0 ? kcalToBurn / kcalPerMinute : 0;
+
+    return {
+      leanMass,
+      targetWeightNow,
+      fatKgToLose,
+      kcalToBurn,
+      treadmillSpeedKmh,
+      treadmillGrade,
+      vo2,
+      kcalPerMinute,
+      walkMinutes,
+    };
+  }
+  function updateTargetBurnHighlight(currentWeight, currentBodyFat) {
+    const plan = calculateTargetBurnPlan(currentWeight, currentBodyFat);
+    const achieved = currentBodyFat <= PROFILE.targetBodyFat || plan.kcalToBurn <= 1;
+    setText("targetBurnKcal", achieved ? "0 kcal" : `${fmt(plan.kcalToBurn)} kcal`);
+    setText("targetBurnWeight", `${fmt(plan.targetWeightNow, 1)} kg`);
+    setText("targetBurnFatKg", achieved ? "Đã đạt" : `${fmt(plan.fatKgToLose, 2)} kg mỡ`);
+    setText(
+      "targetBurnSub",
+      achieved
+        ? `Mỡ ước tính hiện tại ${fmt(currentBodyFat, 1)}%, đã ở ngưỡng mục tiêu ${fmt(PROFILE.targetBodyFat, 0)}%.`
+        : `Tính từ ${fmt(currentWeight, 1)} kg và ${fmt(currentBodyFat, 1)}% mỡ hiện tại. Cần tạo thâm hụt tương đương ${fmt(plan.fatKgToLose, 2)} kg mỡ để xuống ${fmt(PROFILE.targetBodyFat, 0)}%.`,
+    );
+    setText(
+      "targetBurnWalkTime",
+      achieved ? "0 giờ" : formatTargetBurnDuration(plan.walkMinutes),
+    );
+    setText(
+      "targetBurnWalkSub",
+      achieved
+        ? "Không cần quy đổi thêm sang đi bộ dốc vì mục tiêu đã đạt theo dữ liệu hiện tại."
+        : `Nếu chỉ quy đổi sang đi bộ dốc 15 với vận tốc 3,3 km/h, cần khoảng ${fmt(Math.ceil(plan.walkMinutes / 60))} giờ tập thực tế.`,
+    );
+    setText("targetBurnRate", `${fmt(plan.kcalPerMinute, 2)} kcal/phút`);
+    setText("targetBurnSessions60", `${fmt(Math.ceil(plan.walkMinutes / 60))} buổi`);
+    setText("targetBurnSessions90", `${fmt(Math.ceil(plan.walkMinutes / 90))} buổi`);
+    setText(
+      "targetBurnFormula",
+      `Công thức: giữ khối nạc hiện tại ${fmt(plan.leanMass, 2)} kg → cân mục tiêu = khối nạc / 0,85. Quy đổi mỡ: 1 kg ≈ 7.700 kcal. Đi bộ dốc dùng phương trình ACSM: VO₂ = 0,1×55 + 1,8×55×0,15 + 3,5 = ${fmt(plan.vo2, 2)} ml/kg/phút.`,
+    );
+  }
+
   function renderTargetDates(
     cumulative,
     totalGoal,
