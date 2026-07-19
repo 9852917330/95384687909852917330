@@ -520,6 +520,82 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
     .target-burn-grid{grid-template-columns:1fr}
   }
 </style>
+
+<style id="tomorrow-history-preview-v9">
+  /* V9: lịch sử hiển thị thêm ngày mai để lập kế hoạch, nhưng mọi tổng quan/charts vẫn chỉ tính đến hôm nay. */
+  html[data-theme] .day-card.today-highlight,
+  html[data-theme="dark"] .day-card.today-highlight {
+    border-left:10px solid #20c997!important;
+    border-color:rgba(32,201,151,.55)!important;
+    background:linear-gradient(145deg,#eafff7,#ffffff 62%,#f4fffb)!important;
+    box-shadow:0 18px 38px rgba(32,201,151,.18)!important;
+  }
+  html[data-theme] .day-card.tomorrow-preview,
+  html[data-theme="dark"] .day-card.tomorrow-preview {
+    border-left:10px solid #ffb703!important;
+    border-color:rgba(255,183,3,.62)!important;
+    background:linear-gradient(145deg,#fff7d6,#ffffff 58%,#fffaf0)!important;
+    box-shadow:0 18px 38px rgba(255,183,3,.18)!important;
+  }
+  html[data-theme] .day-card.today-highlight .day-head,
+  html[data-theme="dark"] .day-card.today-highlight .day-head {
+    background:linear-gradient(90deg,#dffbf1,#ffffff)!important;
+  }
+  html[data-theme] .day-card.tomorrow-preview .day-head,
+  html[data-theme="dark"] .day-card.tomorrow-preview .day-head {
+    background:linear-gradient(90deg,#fff1bb,#ffffff)!important;
+  }
+  .day-flag {
+    display:inline-flex;
+    width:max-content;
+    max-width:100%;
+    margin-top:7px;
+    padding:5px 8px;
+    border-radius:999px;
+    font-size:7.5px;
+    line-height:1.15;
+    font-weight:1000;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    white-space:normal;
+  }
+  .day-flag.today {
+    color:#07543d;
+    background:#b8f4de;
+    border:1px solid rgba(32,201,151,.45);
+  }
+  .day-flag.tomorrow {
+    color:#5c3700;
+    background:#ffe29a;
+    border:1px solid rgba(255,183,3,.55);
+  }
+  html[data-theme="dark"] .day-card.today-highlight,
+  html[data-theme="dark"] .day-card.today-highlight .food-box,
+  html[data-theme="dark"] .day-card.today-highlight .metric-box {
+    background:linear-gradient(145deg,rgba(17,72,57,.92),rgba(14,34,52,.96))!important;
+  }
+  html[data-theme="dark"] .day-card.tomorrow-preview,
+  html[data-theme="dark"] .day-card.tomorrow-preview .food-box,
+  html[data-theme="dark"] .day-card.tomorrow-preview .metric-box {
+    background:linear-gradient(145deg,rgba(94,63,11,.92),rgba(44,32,18,.96))!important;
+  }
+  html[data-theme="dark"] .day-card.today-highlight .day-head {
+    background:linear-gradient(90deg,rgba(30,112,86,.86),rgba(14,34,52,.96))!important;
+  }
+  html[data-theme="dark"] .day-card.tomorrow-preview .day-head {
+    background:linear-gradient(90deg,rgba(137,89,12,.88),rgba(46,33,18,.96))!important;
+  }
+  html[data-theme="dark"] .day-card.today-highlight .day-date strong,
+  html[data-theme="dark"] .day-card.tomorrow-preview .day-date strong {
+    color:#ffffff!important;
+  }
+  @media(max-width:620px){
+    .day-flag{font-size:7px;padding:4px 7px}
+    html[data-theme] .day-card.today-highlight,
+    html[data-theme] .day-card.tomorrow-preview{border-left-width:7px!important}
+  }
+</style>
+
 </head>
 
 <body>
@@ -7661,6 +7737,13 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
       return d && dateKey(d) <= todayKey;
     });
   }
+  function rowsThroughTomorrowForHistory(rows) {
+    const tomorrowKey = dateKey(addCalendarDays(getVietnamToday(), 1));
+    return rows.filter((r) => {
+      const d = parseDate(r.date);
+      return d && dateKey(d) <= tomorrowKey;
+    });
+  }
   function compute(rows) {
     const normalized = normalizeRows(rows),
       firstWeight =
@@ -7867,10 +7950,17 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
       currentWeight,
       currentBf,
     );
+    const historyPreviewDays = compute(rowsThroughTomorrowForHistory(rawRows)),
+      tomorrowPreviewCount = Math.max(0, historyPreviewDays.length - computedDays.length);
     renderCalendar(computedDays, today.getFullYear());
-    renderHistory(computedDays);
+    renderHistory(historyPreviewDays, today);
     renderCharts(completeDays);
-    setText("historyCount", `${computedDays.length} ngày`);
+    setText(
+      "historyCount",
+      tomorrowPreviewCount
+        ? `${computedDays.length} ngày đã tính · +${tomorrowPreviewCount} ngày mai dự kiến`
+        : `${computedDays.length} ngày`,
+    );
   }
   function updateSlope(progressRaw, cumulative, totalGoal, targetWeight) {
     const p = clamp(progressRaw, 0, 1),
@@ -8126,8 +8216,10 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
         }),
       );
   }
-  function renderHistory(days) {
-    const list = document.getElementById("historyList");
+  function renderHistory(days, today = getVietnamToday()) {
+    const list = document.getElementById("historyList"),
+      todayKey = dateKey(today),
+      tomorrowKey = dateKey(addCalendarDays(today, 1));
     if (!days.length) {
       list.innerHTML =
         '<div class="panel" style="padding:20px;color:var(--muted)">Chưa có dữ liệu trong Sheet.</div>';
@@ -8136,7 +8228,20 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
     list.innerHTML = [...days]
       .reverse()
       .map((d) => {
-        const state = !d.complete ? "incomplete" : d.achieved ? "good" : "bad",
+        const dayKey = dateKey(d.date),
+          isToday = dayKey === todayKey,
+          isTomorrowPreview = dayKey === tomorrowKey,
+          daySpecialClass = isTomorrowPreview
+            ? "tomorrow-preview"
+            : isToday
+              ? "today-highlight"
+              : "",
+          dayFlag = isTomorrowPreview
+            ? '<span class="day-flag tomorrow">Dự kiến ngày mai · chỉ hiện trong Lịch sử · chưa tính vào tổng quan</span>'
+            : isToday
+              ? '<span class="day-flag today">Hôm nay · đang được tính vào toàn bộ dashboard</span>'
+              : "",
+          state = !d.complete ? "incomplete" : d.achieved ? "good" : "bad",
           status = !d.complete
             ? `Chưa đủ dữ liệu${d.foodEst.unresolvedCount ? ` — ${d.foodEst.unresolvedCount} món chưa nhận diện` : ""}`
             : d.deficit > 0
@@ -8160,7 +8265,7 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
                 `<div class="breakdown-row ${i.resolved ? "" : "unresolved-row"}"><span><strong>${escapeHtml(i.label)}</strong><div class="macro-line">${i.resolved ? macroPillsHtml(i) : ""}</div><small>${escapeHtml(i.basis)}</small><br><em>${escapeHtml(i.confidenceText)} · ${escapeHtml(i.source)}</em></span><b>${i.resolved ? `${fmt(i.kcal)} kcal` : "Cần bổ sung"}</b></div>`,
             )
             .join("");
-        return `<article id="day-${dateKey(d.date)}" class="day-card ${state}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span></div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b></div><div class="mini-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
+        return `<article id="day-${dayKey}" class="day-card ${state} ${daySpecialClass}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span>${dayFlag}</div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b></div><div class="mini-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
       })
       .join("");
   }
