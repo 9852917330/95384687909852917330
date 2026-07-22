@@ -615,6 +615,263 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
   .mini-metric.total-out b{font-size:20px!important;color:#66f2c2!important}
 </style>
 
+
+<style id="history-ui-v15">
+  /* V15: tăng tương phản và sắp xếp lại layout phần Lịch sử để dễ đọc hơn trên cả theme sáng/tối */
+  #page-history .history-toolbar{
+    padding:14px 16px!important;
+    border-radius:16px!important;
+    font-size:13px!important;
+    font-weight:900!important;
+  }
+  #page-history .history-toolbar strong{color:var(--text)!important}
+  #page-history .history-toolbar span{color:var(--muted)!important;font-weight:800!important}
+
+  #page-history .day-card{
+    border-radius:22px!important;
+    overflow:hidden!important;
+  }
+  #page-history .day-head{
+    gap:14px!important;
+    padding:16px 18px!important;
+  }
+  #page-history .day-date strong{
+    font-size:16px!important;
+    font-weight:1000!important;
+    letter-spacing:-.02em!important;
+  }
+  #page-history .day-date span{
+    font-size:11px!important;
+    font-weight:700!important;
+  }
+  #page-history .day-flag{
+    margin-top:8px!important;
+    padding:7px 10px!important;
+    font-size:9px!important;
+    line-height:1.25!important;
+    letter-spacing:.03em!important;
+  }
+  #page-history .flow-box{
+    min-height:76px;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    border:1px solid rgba(30,72,60,.12)!important;
+    border-radius:14px!important;
+    box-shadow:0 8px 20px rgba(0,0,0,.04)!important;
+  }
+  #page-history .flow-box span{
+    font-size:10px!important;
+    font-weight:800!important;
+  }
+  #page-history .flow-box b{
+    font-size:18px!important;
+    font-weight:1000!important;
+    line-height:1.05!important;
+    letter-spacing:-.03em!important;
+  }
+  #page-history .status-badge{
+    font-size:10px!important;
+    padding:8px 12px!important;
+    border-radius:999px!important;
+  }
+  #page-history .macro-pill{
+    font-size:10px!important;
+    padding:6px 10px!important;
+    border-radius:999px!important;
+  }
+  #page-history .day-body{
+    gap:14px!important;
+    padding:15px!important;
+  }
+  #page-history .food-box,
+  #page-history .metric-box{
+    border-radius:18px!important;
+    border:1px solid rgba(30,72,60,.12)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.04)!important;
+  }
+  #page-history .food-box p{
+    font-size:12px!important;
+    line-height:1.72!important;
+    font-weight:700!important;
+  }
+  #page-history .food-box summary{
+    font-size:10px!important;
+    font-weight:1000!important;
+  }
+  #page-history .metric-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2, minmax(0,1fr))!important;
+    grid-template-areas:
+      'base total'
+      'strength cardio'
+      'weight waist';
+    gap:10px!important;
+  }
+  #page-history .mini-metric{
+    min-height:88px!important;
+    padding:12px!important;
+    border-radius:14px!important;
+    border:1px solid rgba(30,72,60,.12)!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    box-shadow:0 8px 18px rgba(0,0,0,.04)!important;
+  }
+  #page-history .mini-metric span{
+    font-size:10px!important;
+    font-weight:800!important;
+    line-height:1.2!important;
+  }
+  #page-history .mini-metric b{
+    margin-top:5px!important;
+    font-size:14px!important;
+    font-weight:1000!important;
+    line-height:1.28!important;
+    letter-spacing:-.02em!important;
+  }
+  #page-history .mini-metric em{
+    display:block!important;
+    margin-top:6px!important;
+    font-size:10px!important;
+    line-height:1.35!important;
+    font-style:normal!important;
+    color:var(--muted)!important;
+  }
+
+  #page-history .mini-metric.base-tdee{grid-area:base}
+  #page-history .mini-metric.total-out{grid-area:total}
+  #page-history .mini-metric.strength-metric{grid-area:strength}
+  #page-history .mini-metric.cardio-metric{grid-area:cardio}
+  #page-history .mini-metric.weight-metric{grid-area:weight}
+  #page-history .mini-metric.bodyfat-metric{grid-area:waist}
+
+  #page-history .mini-metric.key-metric{
+    background:linear-gradient(145deg,#f4fff9,#ffffff)!important;
+    border:2px solid rgba(46,230,166,.22)!important;
+  }
+  #page-history .mini-metric.key-metric span{color:#1d6150!important}
+  #page-history .mini-metric.base-tdee b{color:#175c8f!important}
+  #page-history .mini-metric.workout-metric{
+    background:linear-gradient(145deg,#f5faff,#ffffff)!important;
+    border-color:rgba(89,184,255,.18)!important;
+  }
+  #page-history .mini-metric.workout-metric span{color:#285f93!important}
+  #page-history .mini-metric.body-metric{
+    background:linear-gradient(145deg,#fbfffe,#ffffff)!important;
+  }
+  #page-history .mini-metric.total-out{
+    background:linear-gradient(145deg,#0e9270,#0a5d59)!important;
+    border:0!important;
+    box-shadow:0 14px 28px rgba(10,93,89,.26)!important;
+  }
+  #page-history .mini-metric.total-out span,
+  #page-history .mini-metric.total-out em{color:rgba(233,255,248,.92)!important}
+  #page-history .mini-metric.total-out b{
+    font-size:26px!important;
+    color:#ffffff!important;
+    line-height:1.02!important;
+  }
+
+  #page-history .day-card.today-highlight{
+    background:linear-gradient(145deg,#f0fff9,#ffffff 62%,#f7fffb)!important;
+    border:2px solid rgba(32,201,151,.62)!important;
+    box-shadow:0 0 0 4px rgba(32,201,151,.12),0 18px 42px rgba(20,88,69,.12)!important;
+  }
+  #page-history .day-card.tomorrow-preview{
+    background:linear-gradient(145deg,#fff8dd,#ffffff 60%,#fffdf4)!important;
+    border:2px solid rgba(244,185,34,.72)!important;
+    box-shadow:0 0 0 4px rgba(244,185,34,.13),0 18px 42px rgba(97,71,0,.10)!important;
+  }
+  #page-history .day-card.today-highlight .day-head{background:linear-gradient(90deg,#dcfaee,#ffffff)!important}
+  #page-history .day-card.tomorrow-preview .day-head{background:linear-gradient(90deg,#fff0b6,#ffffff)!important}
+  #page-history .day-flag.today{background:#baf7e1!important;color:#063a2a!important;border-color:rgba(32,201,151,.45)!important}
+  #page-history .day-flag.tomorrow{background:#ffd752!important;color:#382500!important;border-color:rgba(240,185,11,.52)!important}
+
+  html[data-theme="dark"] #page-history .history-toolbar{
+    background:linear-gradient(90deg,rgba(69,230,179,.13),rgba(89,184,255,.10))!important;
+    border:1px solid rgba(105,170,230,.22)!important;
+    color:#f4fbff!important;
+  }
+  html[data-theme="dark"] #page-history .day-card{
+    background:linear-gradient(145deg,#13253b,#101b2d)!important;
+    border:1px solid rgba(123,170,233,.22)!important;
+    box-shadow:0 18px 40px rgba(0,0,0,.28)!important;
+  }
+  html[data-theme="dark"] #page-history .day-head{
+    background:linear-gradient(90deg,rgba(28,47,74,.96),rgba(15,28,46,.96))!important;
+    border-bottom-color:rgba(123,170,233,.14)!important;
+  }
+  html[data-theme="dark"] #page-history .flow-box,
+  html[data-theme="dark"] #page-history .food-box,
+  html[data-theme="dark"] #page-history .metric-box,
+  html[data-theme="dark"] #page-history .mini-metric{
+    background:rgba(255,255,255,.05)!important;
+    border-color:rgba(123,170,233,.16)!important;
+    box-shadow:none!important;
+  }
+  html[data-theme="dark"] #page-history .flow-box:nth-of-type(1){background:rgba(255,152,95,.12)!important}
+  html[data-theme="dark"] #page-history .flow-box:nth-of-type(2){background:rgba(89,184,255,.12)!important}
+  html[data-theme="dark"] #page-history .flow-box:nth-of-type(3){background:rgba(69,230,179,.12)!important}
+  html[data-theme="dark"] #page-history .mini-metric.key-metric{
+    background:linear-gradient(145deg,rgba(69,230,179,.12),rgba(255,255,255,.05))!important;
+  }
+  html[data-theme="dark"] #page-history .mini-metric.workout-metric{
+    background:linear-gradient(145deg,rgba(89,184,255,.10),rgba(255,255,255,.05))!important;
+  }
+  html[data-theme="dark"] #page-history .mini-metric.total-out{
+    background:linear-gradient(145deg,#0ea17a,#0a5451)!important;
+    border:0!important;
+    box-shadow:0 12px 26px rgba(0,0,0,.22)!important;
+  }
+  html[data-theme="dark"] #page-history .day-card.today-highlight{
+    background:linear-gradient(145deg,#143c38,#0f1d31)!important;
+    border-color:#44d8a7!important;
+  }
+  html[data-theme="dark"] #page-history .day-card.tomorrow-preview{
+    background:linear-gradient(145deg,#4f3b13,#20180f)!important;
+    border-color:#f7c948!important;
+  }
+  html[data-theme="dark"] #page-history .day-card.today-highlight .day-head{
+    background:linear-gradient(90deg,rgba(34,109,86,.96),rgba(15,28,46,.96))!important;
+  }
+  html[data-theme="dark"] #page-history .day-card.tomorrow-preview .day-head{
+    background:linear-gradient(90deg,rgba(128,97,22,.96),rgba(32,24,15,.96))!important;
+  }
+  html[data-theme="dark"] #page-history .day-date strong,
+  html[data-theme="dark"] #page-history .flow-box b,
+  html[data-theme="dark"] #page-history .food-box p,
+  html[data-theme="dark"] #page-history .mini-metric b,
+  html[data-theme="dark"] #page-history .history-toolbar strong{color:#f7fbff!important}
+  html[data-theme="dark"] #page-history .day-date span,
+  html[data-theme="dark"] #page-history .flow-box span,
+  html[data-theme="dark"] #page-history .mini-metric span,
+  html[data-theme="dark"] #page-history .mini-metric em,
+  html[data-theme="dark"] #page-history .breakdown-row small,
+  html[data-theme="dark"] #page-history .breakdown-row em,
+  html[data-theme="dark"] #page-history .history-toolbar span{color:#c6d7ea!important}
+  html[data-theme="dark"] #page-history .food-box summary{color:#5bf0c1!important}
+  html[data-theme="dark"] #page-history .breakdown-row{background:rgba(255,255,255,.045)!important;border-color:rgba(123,170,233,.15)!important}
+
+  @media(max-width:900px){
+    #page-history .day-head{grid-template-columns:1fr!important}
+  }
+  @media(max-width:620px){
+    #page-history .day-body{grid-template-columns:1fr!important;padding:12px!important}
+    #page-history .metric-grid{
+      grid-template-columns:1fr 1fr!important;
+      grid-template-areas:
+        'base total'
+        'strength cardio'
+        'weight waist';
+    }
+    #page-history .flow-box{min-height:72px!important}
+    #page-history .flow-box b{font-size:16px!important}
+    #page-history .mini-metric b{font-size:13px!important}
+    #page-history .mini-metric.total-out b{font-size:22px!important}
+  }
+</style>
+
 </head>
 
 <body>
@@ -8306,7 +8563,7 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
                 `<div class="breakdown-row ${i.resolved ? "" : "unresolved-row"}"><span><strong>${escapeHtml(i.label)}</strong><div class="macro-line">${i.resolved ? macroPillsHtml(i) : ""}</div><small>${escapeHtml(i.basis)}</small><br><em>${escapeHtml(i.confidenceText)} · ${escapeHtml(i.source)}</em></span><b>${i.resolved ? `${fmt(i.kcal)} kcal` : "Cần bổ sung"}</b></div>`,
             )
             .join("");
-        return `<article id="day-${dayKey}" class="day-card ${state} ${daySpecialClass}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span>${dayFlag}</div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric total-out"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b><em style="display:block;margin-top:4px;color:var(--muted);font-size:9px;font-style:normal">TDEE nền ${fmt(d.baseTdee)} + calo tập ${fmt(d.exerciseBurn)}</em></div><div class="mini-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
+        return `<article id="day-${dayKey}" class="day-card ${state} ${daySpecialClass}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span>${dayFlag}</div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric key-metric base-tdee"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric total-out key-metric"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b><em>TDEE nền ${fmt(d.baseTdee)} + calo tập ${fmt(d.exerciseBurn)}</em></div><div class="mini-metric workout-metric strength-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric workout-metric cardio-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric body-metric weight-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric body-metric bodyfat-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
       })
       .join("");
   }
