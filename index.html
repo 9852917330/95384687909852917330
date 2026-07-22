@@ -598,76 +598,84 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
 
 
 
-<style id="calorie-v11-final-fixes">
-  /* V11: ưu tiên số 1 phải nổi bật nhất toàn bộ web. */
-  .target-burn-hero{
-    border-width:3px!important;
-    border-color:#F0B90B!important;
-    box-shadow:0 26px 78px rgba(0,0,0,.42),0 0 0 2px rgba(240,185,11,.18) inset,0 0 40px rgba(240,185,11,.16)!important;
+<style id="calorie-out-v12-critical-fix">
+  .exercise-out-highlight{
+    grid-column:1/-1!important;
+    border:1px solid rgba(32,201,151,.52)!important;
+    background:linear-gradient(135deg,rgba(32,201,151,.16),rgba(89,184,255,.10))!important;
   }
-  .target-burn-eyebrow{
-    font-size:11px!important;
-    font-weight:1000!important;
-    color:#181A20!important;
-    background:#F0B90B!important;
-    border-color:#FCD535!important;
-  }
-  .target-burn-title{
-    font-size:clamp(22px,3.6vw,36px)!important;
-    font-weight:1000!important;
-    color:#fff!important;
-  }
-  .target-burn-kcal{
-    font-size:clamp(48px,8vw,86px)!important;
-    font-weight:1000!important;
-    color:#FCD535!important;
-    letter-spacing:-2.8px!important;
-    text-shadow:0 0 28px rgba(252,213,53,.28)!important;
-  }
-  .target-burn-time{
-    font-size:clamp(40px,6.8vw,72px)!important;
-    font-weight:1000!important;
-    color:#0ECB81!important;
-    letter-spacing:-2.2px!important;
-  }
-  .target-burn-sub,.target-burn-walk-sub{
+  .exercise-out-highlight b{
+    color:#65f2c7!important;
     font-size:14px!important;
-    font-weight:900!important;
-    color:#fff3c4!important;
-  }
-  .target-burn-mini b{
-    font-size:17px!important;
     font-weight:1000!important;
-  }
-  .target-burn-formula{
-    font-size:11px!important;
-    font-weight:800!important;
   }
   .mini-metric small{
     display:block;
-    margin-top:5px;
+    margin-top:4px;
     color:var(--muted);
-    font-size:10px;
+    font-size:8px;
     line-height:1.35;
-    font-weight:800;
+    font-weight:850;
   }
-  .mini-metric.exercise-total{
-    grid-column:1/-1;
-    border-color:rgba(14,203,129,.44)!important;
-    background:rgba(14,203,129,.08)!important;
+  .target-burn-hero{
+    border-width:3px!important;
+    border-color:#ffc66d!important;
+    box-shadow:0 28px 85px rgba(0,0,0,.38),0 0 0 4px rgba(255,198,109,.16),0 0 44px rgba(255,198,109,.18)!important;
   }
-  .mini-metric.exercise-total b{
-    color:#0ECB81!important;
-    font-size:17px!important;
+  .target-burn-eyebrow{
+    font-size:11px!important;
+    padding:8px 12px!important;
+    color:#321b00!important;
+    background:linear-gradient(135deg,#ffc66d,#ffe3a8)!important;
+    border-color:#ffe1a0!important;
+  }
+  .target-burn-title{
+    font-size:clamp(21px,3.2vw,33px)!important;
     font-weight:1000!important;
+    color:#ffffff!important;
+  }
+  .target-burn-kcal{
+    font-size:clamp(46px,8vw,82px)!important;
+    font-weight:1200!important;
+    color:#ffd166!important;
+    text-shadow:0 0 34px rgba(255,209,102,.34)!important;
+  }
+  .target-burn-sub{
+    font-size:14px!important;
+    font-weight:950!important;
+    color:#fff1cc!important;
+  }
+  .target-burn-time{
+    font-size:clamp(38px,6.5vw,66px)!important;
+    font-weight:1200!important;
+    color:#75ffd1!important;
+  }
+  .target-burn-walk-label{
+    font-size:12px!important;
+    font-weight:1000!important;
+    color:#b5ffe8!important;
+  }
+  .target-burn-walk-sub{
+    font-size:13px!important;
+    font-weight:900!important;
+    color:#ddfff4!important;
+  }
+  .target-burn-mini b{
+    font-size:16px!important;
+    font-weight:1000!important;
+    color:#ffffff!important;
+  }
+  .target-burn-mini span{
+    font-size:9px!important;
+    font-weight:1000!important;
+    color:#c6ded6!important;
   }
   @media(max-width:620px){
-    .target-burn-kcal{font-size:44px!important;}
-    .target-burn-time{font-size:37px!important;}
-    .target-burn-sub,.target-burn-walk-sub{font-size:12px!important;}
+    .target-burn-kcal{font-size:44px!important}
+    .target-burn-time{font-size:38px!important}
+    .target-burn-title{font-size:21px!important}
   }
 </style>
-
 </head>
 
 <body>
@@ -7588,52 +7596,59 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
   function renderFoodDatabase() {}
   function previewFoodText() {}
   function parseDurationMinutes(text, type) {
-    const raw = text ?? "";
-    if (typeof raw === "number" && Number.isFinite(raw)) {
-      if (raw > 0 && raw < 1) return Math.max(0, Math.round(raw * 24 * 60));
-      if ((type === "strength" || type === "cardio") && raw > 0 && raw <= 5)
-        return Math.max(0, Math.round(raw * 60));
-      return Math.max(0, Math.round(raw));
+    // Cột tập tạ/cardio trong Google Sheets có thể trả về nhiều kiểu:
+    // - Chuỗi người dùng nhập: "1h", "5 mins", "60 phút", "01:30"
+    // - Số duration của Google Sheet: 1h = 0.0416667 ngày
+    // - Array timeofday của Google Visualization: [1,0,0,0]
+    // Hàm này chuẩn hóa tất cả về phút để calo Out không bị rơi về 0.
+    if (Array.isArray(text)) {
+      const h = Number(text[0]) || 0,
+        m = Number(text[1]) || 0,
+        sec = Number(text[2]) || 0;
+      return Math.max(0, Math.round(h * 60 + m + sec / 60));
     }
-    const original = String(raw).trim();
-    const src = strip(original).trim();
-    if (!src || /^(0|0+\.0+|khong|none|no|-)$/.test(src)) return 0;
-
-    const sheetsDuration = src.match(/^0?\.\d+$/);
-    if (sheetsDuration) {
-      const val = parseFloat(src.replace(",", "."));
-      if (Number.isFinite(val) && val > 0 && val < 1)
-        return Math.max(0, Math.round(val * 24 * 60));
+    if (typeof text === "number" && Number.isFinite(text)) {
+      if (text <= 0) return 0;
+      // Google Sheets duration/time serial: 1h = 1/24 ngày.
+      if (text > 0 && text < 1) return Math.round(text * 1440);
+      return Math.round(type === "strength" && text <= 5 ? text * 60 : text);
     }
-
-    const dateDuration = src.match(/date\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(\d+)\s*,\s*(\d+)?\s*,\s*(\d+)?/);
-    if (dateDuration) {
-      return Math.max(0, Math.round((+dateDuration[1] || 0) * 60 + (+dateDuration[2] || 0) + (+dateDuration[3] || 0) / 60));
-    }
-
-    const clock = src.match(/\b(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?\b/);
-    if (clock) {
-      return Math.max(0, Math.round((+clock[1] || 0) * 60 + (+clock[2] || 0) + (+clock[3] || 0) / 60));
-    }
-
-    const compactHm = src.match(/(\d+(?:[.,]\d+)?)\s*h\s*(\d{1,2})\b/);
-    if (compactHm) {
-      return Math.max(0, Math.round(parseFloat(compactHm[1].replace(",", ".")) * 60 + (+compactHm[2] || 0)));
-    }
-
+    const raw = String(text ?? "").trim();
+    const src = strip(raw).trim();
+    if (!src || /^(0|khong|none|no|null|undefined)$/.test(src)) return 0;
     let minutes = 0;
+    const dateTimeLike = src.match(/date\(\s*\d{4}\s*,\s*\d{1,2}\s*,\s*\d{1,2}\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})(?:\s*,\s*(\d{1,2}))?/i);
+    if (dateTimeLike) {
+      return Math.max(
+        0,
+        Math.round((+dateTimeLike[1] || 0) * 60 + (+dateTimeLike[2] || 0) + ((+dateTimeLike[3] || 0) / 60)),
+      );
+    }
+    const arrayLike = src.match(/^\s*(\d{1,2})\s*,\s*(\d{1,2})\s*,\s*(\d{1,2})(?:\s*,\s*\d+)?\s*$/);
+    if (arrayLike) {
+      return Math.max(
+        0,
+        Math.round(+arrayLike[1] * 60 + +arrayLike[2] + +arrayLike[3] / 60),
+      );
+    }
+    const clock = src.match(/\b(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?\b/);
+    if (clock) minutes += +clock[1] * 60 + +clock[2] + ((+clock[3] || 0) / 60);
     const hour = src.match(/(\d+(?:[.,]\d+)?)\s*(h|hr|hrs|hour|hours|gio|tieng)\b/);
     if (hour) minutes += parseFloat(hour[1].replace(",", ".")) * 60;
-    const min = src.match(/(\d+(?:[.,]\d+)?)\s*(m|min|mins|minute|minutes|phut|p)\b/);
-    if (min) minutes += parseFloat(min[1].replace(",", "."));
-
+    const compactHour = src.match(/\b(\d+(?:[.,]\d+)?)h(?:\s*(\d+(?:[.,]\d+)?)\s*(?:m|min|mins|minute|minutes|phut|p)?)?/);
+    if (compactHour && !hour) {
+      minutes += parseFloat(compactHour[1].replace(",", ".")) * 60;
+      if (compactHour[2]) minutes += parseFloat(compactHour[2].replace(",", "."));
+    }
+    const min = src.match(
+      /(\d+(?:[.,]\d+)?)\s*(m|min|mins|minute|minutes|phut|p)\b/,
+    );
+    if (min && !(compactHour && !hour)) minutes += parseFloat(min[1].replace(",", "."));
     if (!minutes) {
       const bare = cleanNumber(src);
       if (bare !== null) {
-        if (bare > 0 && bare < 1) minutes = bare * 24 * 60;
-        else if ((type === "strength" || type === "cardio") && bare > 0 && bare <= 5)
-          minutes = bare * 60;
-        else minutes = bare;
+        if (bare > 0 && bare < 1) minutes = bare * 1440;
+        else minutes = type === "strength" && bare <= 5 ? bare * 60 : bare;
       }
     }
     return Math.max(0, Math.round(minutes));
@@ -8369,7 +8384,7 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
                 `<div class="breakdown-row ${i.resolved ? "" : "unresolved-row"}"><span><strong>${escapeHtml(i.label)}</strong><div class="macro-line">${i.resolved ? macroPillsHtml(i) : ""}</div><small>${escapeHtml(i.basis)}</small><br><em>${escapeHtml(i.confidenceText)} · ${escapeHtml(i.source)}</em></span><b>${i.resolved ? `${fmt(i.kcal)} kcal` : "Cần bổ sung"}</b></div>`,
             )
             .join("");
-        return `<article id="day-${dayKey}" class="day-card ${state} ${daySpecialClass}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span>${dayFlag}</div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric exercise-total"><span>Calo tập được cộng vào Out</span><b>${fmt(d.exerciseBurn)} kcal = tạ ${fmt(d.strengthBurn)} + cardio ${fmt(d.cardioBurn)}</b></div><div class="mini-metric"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b><small>TDEE nền ${fmt(d.baseTdee)} + calo tập ${fmt(d.exerciseBurn)}</small></div><div class="mini-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
+        return `<article id="day-${dayKey}" class="day-card ${state} ${daySpecialClass}"><div class="day-head"><div class="day-date"><strong>${formatDateVi(d.date)}</strong><span>${d.foodEst.items.length} nhóm thực phẩm${d.foodEst.unresolvedCount ? ` · ${d.foodEst.unresolvedCount} chưa nhận diện` : ""}</span>${dayFlag}</div><div class="flow"><div class="flow-box"><span>Calo vào</span><b class="orange">${intake}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Tổng calo ra</span><b class="blue">${fmt(d.totalOut)}</b></div><span class="flow-arrow">→</span><div class="flow-box"><span>Kết quả năng lượng</span><b class="${d.complete ? (d.deficit > 0 ? "green" : d.deficit < 0 ? "red" : "blue") : "orange"}">${balance}</b></div></div><div class="day-summary-row"><span class="status-badge ${state}">${status}</span><span class="daily-macro-wrap" title="Tổng Protein, Carb và Fat ước tính trong ngày">${macroPillsHtml({ protein: d.foodEst.proteinTotal, carbs: d.foodEst.carbsTotal, fat: d.foodEst.fatTotal })}</span></div></div><div class="day-body"><div class="food-box"><p>${escapeHtml(formatFoodText(d.food || "Chưa nhập đồ ăn"))}</p><details ${d.foodEst.unresolvedCount ? "open" : ""}><summary>Xem từng món và cách tính</summary><div class="breakdown">${breakdown || '<div style="color:var(--muted);font-size:10px">Chưa có dữ liệu món ăn.</div>'}</div></details></div><div class="metric-box"><div class="metric-grid"><div class="mini-metric"><span>TDEE nền</span><b>${fmt(d.baseTdee)} kcal</b></div><div class="mini-metric"><span>Tập tạ</span><b>${fmt(d.strengthMin)} phút · tiêu hao ${fmt(d.strengthBurn)} kcal</b></div><div class="mini-metric"><span>Cardio 15% · 3,3 km/h</span><b>${fmt(d.cardioMin)} phút · tiêu hao ${fmt(d.cardioBurn)} kcal</b></div><div class="mini-metric exercise-out-highlight"><span>Calo tập được cộng vào Out</span><b>${fmt(d.exerciseBurn)} kcal = tạ ${fmt(d.strengthBurn)} + cardio ${fmt(d.cardioBurn)}</b></div><div class="mini-metric"><span>Tổng calo ra</span><b>${fmt(d.totalOut)} kcal</b><small>TDEE nền ${fmt(d.baseTdee)} + calo tập ${fmt(d.exerciseBurn)}</small></div><div class="mini-metric"><span>Cân hiện tại</span><b>${fmt(d.projectedWeight, 2)} kg</b></div><div class="mini-metric"><span>Vòng eo · Mỡ</span><b>${d.waistUsed !== null ? `${fmt(d.waistUsed, 1)} cm · ` : ""}${fmt(d.bodyFat, 1)}%</b></div></div></div></div></article>`;
       })
       .join("");
   }
@@ -8561,19 +8576,14 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
       waist: 5,
     };
     const rawCell = (row, n) => row?.c?.[n] ?? null;
-    const valueCell = (row, n) => {
+    const valueCell = (row, n, opts = {}) => {
       const c = rawCell(row, n);
       if (!c) return 0;
-      const value = c.v ?? c.f ?? 0;
-      return value === null || value === "" ? 0 : value;
-    };
-    const durationCell = (row, n) => {
-      const c = rawCell(row, n);
-      if (!c) return 0;
-      const formatted = c.f;
-      if (formatted !== null && formatted !== undefined && String(formatted).trim() !== "")
-        return formatted;
-      const value = c.v ?? 0;
+      // Với cột C/D, Google Visualization thường trả c.v là số ngày hoặc array timeofday,
+      // còn c.f mới là thứ người dùng nhìn thấy trong Sheet như "1h"/"5 mins".
+      // Ưu tiên formattedValue để không làm mất calo tập.
+      let value = opts.preferFormatted && c.f !== undefined && c.f !== null && c.f !== "" ? c.f : c.v;
+      if (value === undefined || value === null || value === "") value = c.f ?? 0;
       return value === null || value === "" ? 0 : value;
     };
     const dateCell = (row) => {
@@ -8587,8 +8597,8 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
       .map((row) => ({
         date: dateCell(row),
         food: valueCell(row, COL.food),
-        strength: durationCell(row, COL.strength),
-        cardio: durationCell(row, COL.cardio),
+        strength: valueCell(row, COL.strength, { preferFormatted: true }),
+        cardio: valueCell(row, COL.cardio, { preferFormatted: true }),
         weight: valueCell(row, COL.weight),
         waist: valueCell(row, COL.waist),
       }))
@@ -8623,8 +8633,8 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
       }, 15000);
       const script = document.createElement("script");
       script.id = "gvizLoader";
-      const query = `select A,B,C,D,E,F`; // A=date, B=food, C=tập tạ, D=cardio, E=cân, F=eo
-      script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(SHEET_NAME)}&range=A:F&headers=1&tqx=${encodeURIComponent(`out:json;responseHandler:${cb}`)}&tq=${encodeURIComponent(query)}&_=${Date.now()}`;
+      const query = `select A,B,C,D,E,F`;
+      script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(SHEET_NAME)}&range=A:Z&headers=1&tqx=${encodeURIComponent(`out:json;responseHandler:${cb}`)}&tq=${encodeURIComponent(query)}&_=${Date.now()}`;
       script.onerror = () => {
         if (done) return;
         done = true;
