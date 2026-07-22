@@ -983,6 +983,126 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
   }
 </style>
 
+
+<style id="contrast-and-mobile-fix-v17">
+  /* V17: fix hụt chữ/phần tử ở History và tăng tương phản cho eyebrow ở cả 2 theme */
+
+  /* === Overview eyebrow / priority line === */
+  .target-burn-eyebrow{
+    display:inline-flex!important;
+    align-items:center!important;
+    gap:7px!important;
+    width:auto!important;
+    max-width:100%!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    border-radius:999px!important;
+    padding:9px 14px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    font-weight:1000!important;
+    letter-spacing:.02em!important;
+    text-transform:uppercase!important;
+    border:1px solid rgba(165,102,0,.18)!important;
+    background:linear-gradient(180deg,#ffe8a3,#ffd969)!important;
+    color:#3d2900!important;
+    text-shadow:none!important;
+    box-shadow:0 2px 0 rgba(255,255,255,.55) inset!important;
+  }
+  html[data-theme="dark"] .target-burn-eyebrow{
+    border-color:rgba(255,217,105,.32)!important;
+    background:linear-gradient(180deg,#4d3a05,#705408)!important;
+    color:#fff1b8!important;
+    box-shadow:0 1px 0 rgba(255,255,255,.06) inset!important;
+  }
+  @media(max-width:620px){
+    .target-burn-eyebrow{font-size:12px!important;padding:8px 11px!important;line-height:1.22!important}
+  }
+
+  /* === History: prevent clipping on mobile === */
+  #page-history .day-head,
+  #page-history .day-head > div,
+  #page-history .day-summary-row,
+  #page-history .daily-macro-wrap,
+  #page-history .flow,
+  #page-history .flow-box,
+  #page-history .day-flag{
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  #page-history .day-head{overflow:visible!important}
+  #page-history .day-summary-row{
+    width:100%!important;
+    overflow:visible!important;
+    gap:10px!important;
+    align-items:flex-start!important;
+  }
+  #page-history .daily-macro-wrap{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:8px!important;
+    width:100%!important;
+    overflow:visible!important;
+  }
+  #page-history .macro-pill{
+    max-width:100%!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    line-height:1.18!important;
+  }
+  #page-history .day-flag,
+  html[data-theme="dark"] #page-history .day-flag{
+    width:auto!important;
+    max-width:100%!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    word-break:break-word!important;
+    flex-wrap:wrap!important;
+    color:#111111!important;
+    text-shadow:none!important;
+  }
+  #page-history .day-flag.today,
+  html[data-theme="dark"] #page-history .day-flag.today{
+    background:#bff5df!important;
+    color:#0b0b0b!important;
+  }
+  #page-history .day-flag.tomorrow,
+  html[data-theme="dark"] #page-history .day-flag.tomorrow{
+    background:#ffd84f!important;
+    color:#111111!important;
+  }
+
+  @media(max-width:700px){
+    #page-history .day-card{overflow:hidden!important}
+    #page-history .day-head{padding:14px 14px 12px!important}
+    #page-history .day-date strong{font-size:15px!important}
+    #page-history .day-date span{font-size:10px!important}
+    #page-history .day-flag{font-size:8.7px!important;padding:8px 10px!important}
+    #page-history .flow{
+      display:grid!important;
+      grid-template-columns:repeat(2,minmax(0,1fr))!important;
+      gap:10px!important;
+      width:100%!important;
+    }
+    #page-history .flow-arrow{display:none!important}
+    #page-history .flow > .flow-box:last-of-type{grid-column:1 / -1!important}
+    #page-history .flow-box{padding:10px!important;min-height:84px!important}
+    #page-history .flow-box span{font-size:10px!important}
+    #page-history .flow-box b{font-size:15px!important;line-height:1.12!important}
+    #page-history .flow-box:last-of-type b{font-size:16px!important}
+    #page-history .status-badge{font-size:9px!important;padding:8px 10px!important;flex:0 0 auto!important}
+    #page-history .macro-pill{font-size:9px!important;padding:6px 9px!important}
+  }
+  @media(max-width:390px){
+    #page-history .day-head{padding:13px 12px 11px!important}
+    #page-history .flow{grid-template-columns:1fr!important}
+    #page-history .flow > .flow-box:last-of-type{grid-column:auto!important}
+    #page-history .daily-macro-wrap{gap:6px!important}
+    #page-history .macro-pill{font-size:8.5px!important;padding:5px 8px!important}
+    #page-history .day-flag{font-size:8px!important;padding:7px 9px!important}
+  }
+</style>
+
 </head>
 
 <body>
