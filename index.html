@@ -872,6 +872,117 @@ html[data-theme="dark"] .theme-toggle{color:#fff!important;background:linear-gra
   }
 </style>
 
+
+<style id="history-mobile-contrast-v16">
+  /* V16: tối ưu mobile trước, sửa tương phản nhãn hôm nay/ngày mai và sửa box flow bị lẹm */
+  #page-history .day-flag,
+  html[data-theme="dark"] #page-history .day-flag{
+    color:#111111!important;
+    text-shadow:none!important;
+    opacity:1!important;
+    filter:none!important;
+    font-weight:1000!important;
+  }
+  #page-history .day-flag.today,
+  html[data-theme="dark"] #page-history .day-flag.today{
+    color:#0a0a0a!important;
+    background:#bff5df!important;
+    border-color:rgba(32,201,151,.55)!important;
+  }
+  #page-history .day-flag.tomorrow,
+  html[data-theme="dark"] #page-history .day-flag.tomorrow{
+    color:#111111!important;
+    background:#ffd84f!important;
+    border-color:rgba(240,185,11,.58)!important;
+  }
+
+  #page-history .flow{min-width:0!important}
+  #page-history .flow-box{min-width:0!important; overflow:hidden!important}
+  #page-history .flow-box span,
+  html[data-theme="dark"] #page-history .flow-box span{
+    color:var(--muted)!important;
+    font-size:10px!important;
+    line-height:1.2!important;
+    font-weight:900!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+  }
+  #page-history .flow-box b,
+  html[data-theme="dark"] #page-history .flow-box b{
+    font-size:17px!important;
+    line-height:1.08!important;
+    letter-spacing:-.03em!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    word-break:break-word!important;
+  }
+  #page-history .flow-box:last-of-type b{font-size:16px!important}
+
+  /* Điện thoại trước: 2 cột + box kết quả full width để không bị lẹm */
+  @media(max-width:700px){
+    #page-history .day-head{
+      grid-template-columns:1fr!important;
+      gap:12px!important;
+    }
+    #page-history .flow{
+      display:grid!important;
+      grid-template-columns:repeat(2,minmax(0,1fr))!important;
+      gap:10px!important;
+      width:100%!important;
+      align-items:stretch!important;
+    }
+    #page-history .flow-arrow{display:none!important}
+    #page-history .flow > .flow-box:last-of-type{
+      grid-column:1 / -1!important;
+    }
+    #page-history .flow-box{
+      min-height:86px!important;
+      padding:10px 11px!important;
+      border-radius:14px!important;
+      display:flex!important;
+      flex-direction:column!important;
+      justify-content:center!important;
+    }
+    #page-history .flow-box:last-of-type{
+      min-height:94px!important;
+    }
+    #page-history .flow-box:last-of-type b{
+      font-size:18px!important;
+    }
+    #page-history .day-flag{
+      display:inline-flex!important;
+      max-width:100%!important;
+      font-size:9px!important;
+      line-height:1.28!important;
+      padding:8px 10px!important;
+      white-space:normal!important;
+      overflow-wrap:anywhere!important;
+    }
+  }
+
+  /* Màn hình rất nhỏ */
+  @media(max-width:390px){
+    #page-history .flow{
+      grid-template-columns:1fr!important;
+    }
+    #page-history .flow > .flow-box:last-of-type{
+      grid-column:auto!important;
+    }
+    #page-history .flow-box{min-height:80px!important}
+    #page-history .flow-box b{font-size:16px!important}
+    #page-history .flow-box:last-of-type b{font-size:17px!important}
+    #page-history .day-flag{font-size:8.5px!important;padding:8px 9px!important}
+  }
+
+  /* Máy tính bảng / desktop vẫn gọn gàng */
+  @media(min-width:701px){
+    #page-history .flow{
+      grid-template-columns:1fr auto 1fr auto 1fr!important;
+    }
+    #page-history .flow-arrow{display:flex!important}
+  }
+</style>
+
 </head>
 
 <body>
