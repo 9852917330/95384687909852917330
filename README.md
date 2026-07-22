@@ -1,13 +1,16 @@
-# In / Out Calorie PWA — Overwrite v9
+# In / Out Calorie PWA — Overwrite v10
 
 Gói cập nhật để upload đè lên repository GitHub Pages hiện tại.
 
-## Thay đổi chính
+## Sửa lỗi và nâng cấp
 
-- Phần Lịch sử có thể hiển thị thêm dữ liệu của ngày mai để lập kế hoạch ăn.
-- Ngày mai chỉ là dữ liệu dự kiến trong Lịch sử, không được cộng vào Tổng quan, Lịch năm, Biểu đồ, tiến độ 15% hoặc tổng lũy kế.
-- Card hôm nay và ngày mai có màu riêng, nổi bật hơn các ngày còn lại.
-- Cache Service Worker đã tăng lên `in-and-out-pwa-2026-07-11-v9`.
+- Sửa phần Lịch sử calo In / Out: calo Out hiện cộng đúng TDEE nền + calo tập tạ + calo cardio.
+- Đọc Google Sheet linh hoạt hơn: hỗ trợ nhận diện cột theo tiêu đề và mở rộng phạm vi từ A:F sang A:Z để tránh mất cột tập/cardio khi Sheet thay đổi thứ tự.
+- Nhận diện thời lượng tập tốt hơn: hỗ trợ 60p, 60ph, 1h30, 1h30p, 01:30, 60 phút.
+- Nếu ô tập/cardio nhập trực tiếp kcal, web dùng kcal đó làm calo tập.
+- Khối “Ưu tiên số 1” ở Tổng quan được làm nổi bật hơn, số liệu kcal và thời gian đi bộ lớn, đậm và rõ hơn.
+- Giữ logic ngày mai: chỉ hiện trong Lịch sử, chưa tính vào Tổng quan/Lịch năm/Biểu đồ/tổng lũy kế cho tới khi ngày đó tới.
+- Cache Service Worker: `in-and-out-pwa-2026-07-11-v10`.
 
 ## Cách cập nhật
 
